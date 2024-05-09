@@ -7,6 +7,8 @@ app.use(express.json());
 const cors = require('cors');
 app.use(cors());
 
+//CONFIG. PADRÃO DO DOTENV
+require('dotenv').config();
 
 app.listen(8080, () => {
     console.log('Servidor no ar');
