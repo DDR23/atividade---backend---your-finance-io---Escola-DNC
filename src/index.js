@@ -14,6 +14,10 @@ require('dotenv').config();
 const conn = require('./db/conn');
 conn();
 
+//EXECUTA A FUNÇÃO DE ROTEAMENTO
+const routes = require('./routes/routes');
+routes(app);
+
 //VERIFICA A EXISTENCIA OU AUSENCIA DA VARIAVEL DE AMBIENTE E ABRE UMA CONEXÃO COM O SERVIDOR, A VARIAVEL ESPERADA É O NOME DO SCHEMA DO BANCO DE DADOS DE PRODUÇÃO
 if(process.env.DB_SCHEMA){
   app.listen(8080, (err) => {
