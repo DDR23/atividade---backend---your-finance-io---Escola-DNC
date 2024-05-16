@@ -24,7 +24,7 @@ router.delete('/delete/:id', async (req, res) => {
 
     //RETORNA O RESULTADO
     res.status(200).json({
-      message: 'goal deleted successfully',
+      message: 'Goal deleted successfully',
       code: 200
     });
 
