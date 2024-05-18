@@ -1,7 +1,7 @@
 //ESSA FUNÇÃO É CHAMADA NO APP.JS E ELA DETERMINA OS ARQUIVOS COM FUNÇÕES QUE CADA ROTA DEVE DISPARAR
 function routes(app) {
   //HOME
-  // app.use('/', require('./index'));
+  app.use('/', require('./index'));
 
   //USER
   app.use('/user', require('./user/postUser'));
