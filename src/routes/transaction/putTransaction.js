@@ -20,29 +20,28 @@ router.put('/edit/:id', async (req, res) => {
       });
     }
 
-    //TORNA O CAMPO 'TRANSACTION_DESCRIPTION' OPCIONAL E EXECUTA CASO ALGUM VALOR SEJA RECEBIDO
-    const newDescription = req.body.TRANSACTION_DESCRIPTION;
-    if (newDescription) {
-      transaction.TRANSACTION_DESCRIPTION = newDescription;
+    //PEGA TODOS OS VALORES PARA QUE SEJAM ALTERADOS
+    const { TRANSACTION_DESCRIPTION, TRANSACTION_AMOUNT, TRANSACTION_DATE, FK_CATEGORY_ID } = req.body;
+
+    //VERIFICA SE ALGUM VALOR FOI PASSADO
+    if (TRANSACTION_DESCRIPTION !== undefined) {
+      transaction.TRANSACTION_DESCRIPTION = TRANSACTION_DESCRIPTION;
     }
 
-    //TORNA O CAMPO 'TRANSACTION_AMOUNT' OPCIONAL E EXECUTA CASO ALGUM VALOR SEJA RECEBIDO
-    const newAmount = req.body.TRANSACTION_AMOUNT;
-    if (newAmount) {
-      transaction.TRANSACTION_AMOUNT = newAmount;
+    //VERIFICA SE ALGUM VALOR FOI PASSADO
+    if (TRANSACTION_AMOUNT !== undefined) {
+      transaction.TRANSACTION_AMOUNT = TRANSACTION_AMOUNT;
     }
 
-    //TORNA O CAMPO 'TRANSACTION_DATE' OPCIONAL E EXECUTA CASO ALGUM VALOR SEJA RECEBIDO
-    const newDate = req.body.TRANSACTION_DATE;
-    if (newDate) {
-      transaction.TRANSACTION_DATE = newDate;
+    //VERIFICA SE ALGUM VALOR FOI PASSADO
+    if (TRANSACTION_DATE !== undefined) {
+      transaction.TRANSACTION_DATE = TRANSACTION_DATE;
     }
 
-    //TORNA O CAMPO 'FK_CATEGORY_ID' OPCIONAL E EXECUTA CASO ALGUM VALOR SEJA RECEBIDO
-    const newCategory = req.body.FK_CATEGORY_ID;
-    if (newCategory) {
-      //VERIFICA SE A CATEGORIA EXISTE
-      const category = await schemaCategory.findByPk( newCategory );
+    //VERIFICA SE ALGUM VALOR FOI PASSADO
+    if (FK_CATEGORY_ID !== undefined) {
+      //VERIFICA SE O VALOR PASSADO EXISTE NO BANCO E RETORNA ERRO
+      const category = await schemaCategory.findByPk( FK_CATEGORY_ID );
       if (!category) {
         return res.status(400).json({
           error: 'Bad Request',
@@ -50,7 +49,8 @@ router.put('/edit/:id', async (req, res) => {
           code: 400
         });
       }
-      transaction.FK_CATEGORY_ID = newCategory;
+      //SALVA O NOVO VALOR
+      transaction.FK_CATEGORY_ID = FK_CATEGORY_ID;
     }
 
     //EXECUTA O PUT
