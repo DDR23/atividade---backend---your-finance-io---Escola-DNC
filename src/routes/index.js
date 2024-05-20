@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 //REQUISIÇÃO HTTP
-router.get('', async (req, res) => {
+router.get('', async (_, res) => {
 
   //EXECUTA ESSE BLOCO AO BATER NA ROTA
   try {
