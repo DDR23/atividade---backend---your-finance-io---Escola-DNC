@@ -12,7 +12,7 @@ router.put('/edit/:id', async (req, res) => {
     //VERIFICA SE A META EXISTE
     const goal = await schemaGoal.findByPk(req.params.id);
     if(!goal){
-      res.status(404).json({
+      return res.status(404).json({
         error: 'Goal not found',
         message: `That goal you're looking for doesn't exist in the database.`,
         code: 404
@@ -41,11 +41,11 @@ router.put('/edit/:id', async (req, res) => {
     await goal.save();
 
     //RETORNA O RESULTADO
-    res.status(200).json(goal);
+    return res.status(200).json(goal);
 
   //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Internal server error',
       message: 'This goal could not be edited due to an internal server error. Please try again later.',
       code: 500

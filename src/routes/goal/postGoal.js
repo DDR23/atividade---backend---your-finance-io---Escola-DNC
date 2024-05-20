@@ -27,11 +27,11 @@ router.post('/create', async (req, res) => {
     const newGoal = await schemaGoal.create({ GOAL_NAME, GOAL_AMOUNT, GOAL_DEADLINE, FK_USER_ID });
 
     //RETORNA O RESULTADO
-    res.status(201).json(newGoal);
+    return res.status(201).json(newGoal);
 
   //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Internal server error',
       message: 'This goal could not be created due to an internal server error. Please try again later.',
       code: 500
