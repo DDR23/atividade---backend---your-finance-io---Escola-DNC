@@ -19,22 +19,22 @@ router.put('/edit/:id', async (req, res) => {
       });
     }
 
-    //TORNA O CAMPO 'GOAL_NAME' OPCIONAL E EXECUTA CASO ALGUM VALOR SEJA RECEBIDO
-    const newGoalName = req.body.GOAL_NAME;
-    if(newGoalName) {
-      goal.GOAL_NAME = newGoalName;
+    //PEGA TODOS OS VALORES PARA QUE SEJAM ALTERADOS
+    const { GOAL_NAME, GOAL_AMOUNT, GOAL_DEADLINE } = req.body;
+
+    //VERIFICA SE ALGUM VALOR FOI PASSADO
+    if(GOAL_NAME !== undefined) {
+      goal.GOAL_NAME = GOAL_NAME;
     }
 
-    //TORNA O CAMPO 'GOAL_AMOUNT' OPCIONAL E EXECUTA CASO ALGUM VALOR SEJA RECEBIDO
-    const newAmount = req.body.GOAL_AMOUNT;
-    if(newAmount) {
-      goal.GOAL_AMOUNT = newAmount;
+    //VERIFICA SE ALGUM VALOR FOI PASSADO
+    if(GOAL_AMOUNT !== undefined) {
+      goal.GOAL_AMOUNT = GOAL_AMOUNT;
     }
 
-    //TORNA O CAMPO 'GOAL_DEADLINE' OPCIONAL E EXECUTA CASO ALGUM VALOR SEJA RECEBIDO
-    const newDeadline = req.body.GOAL_DEADLINE;
-    if(newDeadline) {
-      goal.GOAL_DEADLINE = newDeadline;
+    //VERIFICA SE ALGUM VALOR FOI PASSADO
+    if(GOAL_DEADLINE !== undefined) {
+      goal.GOAL_DEADLINE = GOAL_DEADLINE;
     }
 
     //EXECUTA O PUT

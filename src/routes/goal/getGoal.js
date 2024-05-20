@@ -4,7 +4,7 @@ const router = express.Router();
 const schemaGoal = require('../../schemas/schemaGoal');
 
 //REQUISIÇÃO HTTP
-router.get('/', async (req, res) => {
+router.get('/', async (_, res) => {
 
   //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {
