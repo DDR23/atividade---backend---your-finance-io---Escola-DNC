@@ -51,11 +51,11 @@ router.put('/edit/:id', async (req, res) => {
     await user.save();
 
     //RETORNA O RESULTADO
-    res.status(200).json(user);
+    return res.status(200).json(user);
 
   //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Internal server error',
       message: 'This user could not be edited due to an internal server error. Please try again later.',
       code: 500

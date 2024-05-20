@@ -26,11 +26,11 @@ router.post('/create', async (req, res) => {
     const newUser = await schemaUser.create({ USER_EMAIL, USER_NAME, USER_PASSWORD });
 
     //RETORNA O RESULTADO
-    res.status(201).json(newUser);
+    return res.status(201).json(newUser);
 
   //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Internal server error',
       message: 'This user could not be created due to an internal server error. Please try again later.',
       code: 500

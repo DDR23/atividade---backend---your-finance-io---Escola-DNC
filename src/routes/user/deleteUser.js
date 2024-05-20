@@ -27,14 +27,14 @@ router.delete('/delete/:id', async (req, res) => {
     await user.destroy();
 
     //RETORNA O RESULTADO
-    res.status(200).json({
+    return res.status(200).json({
       message: 'user deleted successfully',
       code: 200
     });
 
   //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Internal server error',
       message: 'This user could not be deleted due to an internal server error. Please try again later.',
       code: 500
