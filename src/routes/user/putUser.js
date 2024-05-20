@@ -19,12 +19,13 @@ router.put('/edit/:id', async (req, res) => {
       });
     }
 
-    //ESSE RESPONSÁVEL POR EDITAR O 'USER_EMAIL'
-    //TORNA O CAMPO 'USER_EMAIL' OPCIONAL E VERIFICA SE ALGUM VALOR FOI PASSADO
-    const newUserEmail = req.body.USER_EMAIL;
-    if(newUserEmail) {
+    //PEGA TODOS OS VALORES PARA QUE SEJAM ALTERADOS
+    const { USER_EMAIL, USER_NAME, USER_PASSWORD } = req.body;
+
+    //VERIFICA SE ALGUM VALOR FOI PASSADO
+    if(USER_EMAIL !== undefined) {
       //VERIFICA SE O VALOR PASSADO JA EXISTE NO BANCO E RETORNA ERRO
-      const emailNotUnique = await schemaUser.findOne({ where: { USER_EMAIL: newUserEmail } });
+      const emailNotUnique = await schemaUser.findOne({ where: { USER_EMAIL: USER_EMAIL } });
       if(emailNotUnique){
         return res.status(409).json({
           error: 'This email already exists',
@@ -33,19 +34,17 @@ router.put('/edit/:id', async (req, res) => {
         });
       }
       //SALVA O NOVO VALOR
-      user.USER_EMAIL = newUserEmail;
+      user.USER_EMAIL = USER_EMAIL;
     }
 
-    //TORNA O CAMPO 'USER_NAME' OPCIONAL E EXECUTA CASO ALGUM VALOR SEJA RECEBIDO
-    const newUserName = req.body.USER_NAME;
-    if(newUserName) {
-      user.USER_NAME = newUserName;
+    //VERIFICA SE ALGUM VALOR FOI PASSADO
+    if(USER_NAME !== undefined) {
+      user.USER_NAME = USER_NAME;
     }
-
-    //TORNA O CAMPO 'USER_PASSWORD' OPCIONAL E EXECUTA CASO ALGUM VALOR SEJA RECEBIDO
-    const newPassword = req.body.USER_PASSWORD;
-    if(newPassword) {
-      user.USER_PASSWORD = newPassword;
+    
+    //VERIFICA SE ALGUM VALOR FOI PASSADO
+    if(USER_PASSWORD !== undefined) {
+      user.USER_PASSWORD = USER_PASSWORD;
     }
 
     //EXECUTA O PUT
