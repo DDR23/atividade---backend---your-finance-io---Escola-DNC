@@ -13,11 +13,11 @@ router.get('/', async (_, res) => {
     const category = await schemaCategory.findAll();
 
     //RETORNA O RESULTADO
-    res.status(200).json(category);
+    return res.status(200).json(category);
 
   //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Internal server error',
       message: `The category list could not be retrieved due to an internal server error. Please reload the page or try again later.`,
       code: 500

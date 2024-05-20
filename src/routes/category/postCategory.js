@@ -37,11 +37,11 @@ router.post('/create', async (req, res) => {
     const newCategory = await schemaCategory.create({ CATEGORY_NAME, FK_USER_ID });
 
     //RETORNA O RESULTADO
-    res.status(201).json(newCategory);
+    return res.status(201).json(newCategory);
 
   //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Internal server error',
       message: 'This inventory could not be created due to an internal server error. Please try again later.',
       code: 500

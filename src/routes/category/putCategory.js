@@ -12,7 +12,7 @@ router.put('/edit/:id', async (req, res) => {
     //VERIFICA SE O INVENTARIO EXISTE
     const category = await schemaCategory.findByPk(req.params.id);
     if(!category){
-      res.status(404).json({
+      return res.status(404).json({
         error: 'Category not found',
         message: `That category you're looking for doesn't exist in the database.`,
         code: 404
@@ -26,11 +26,11 @@ router.put('/edit/:id', async (req, res) => {
     await category.save();
 
     //RETORNA O RESULTADO
-    res.status(200).json(category);
+    return res.status(200).json(category);
 
   //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Internal server error',
       message: 'This category could not be edited due to an internal server error. Please try again later.',
       code: 500
