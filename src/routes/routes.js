@@ -23,6 +23,13 @@ function routes(app) {
   app.use('/goal', require('./goal/getOneGoal'));
   app.use('/goal', require('./goal/putGoal'));
   app.use('/goal', require('./goal/deleteGoal'));
+
+  //TRANSACTION
+  app.use('/transaction', require('./transaction/postTransaction'));
+  app.use('/transaction', require('./transaction/getTransaction'));
+  app.use('/transaction', require('./transaction/getOneTransaction'));
+  app.use('/transaction', require('./transaction/putTransaction'));
+  app.use('/transaction', require('./transaction/deleteTransaction'));
 };
 
 module.exports = routes;

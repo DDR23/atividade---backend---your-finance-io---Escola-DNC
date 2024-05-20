@@ -15,6 +15,7 @@ router.get('', async (req, res) => {
         <li><a href="/user">user</a></li>
         <li><a href="/goal">goal</a></li>
         <li><a href="/category">category</a></li>
+        <li><a href="/transaction">transaction</a></li>
       </ul>
     `);
 
