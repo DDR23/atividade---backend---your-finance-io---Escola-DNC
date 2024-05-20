@@ -38,11 +38,11 @@ router.post('/create', async (req, res) => {
     const newTransaction = await schemaTransaction.create({ TRANSACTION_AMOUNT, TRANSACTION_DESCRIPTION, TRANSACTION_DATE, FK_USER_ID, FK_CATEGORY_ID });
 
     //RETORNA O RESULTADO
-    res.status(201).json(newTransaction);
+    return res.status(201).json(newTransaction);
 
   //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Internal server error',
       message: 'This transaction could not be created due to an internal server error. Please try again later.',
       code: 500

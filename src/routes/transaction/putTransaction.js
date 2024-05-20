@@ -57,11 +57,11 @@ router.put('/edit/:id', async (req, res) => {
     await transaction.save();
 
     //RETORNA O RESULTADO
-    res.status(200).json(transaction);
+    return res.status(200).json(transaction);
 
     //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       error: 'Internal server error',
       message: 'This transaction could not be edited due to an internal server error. Please try again later.',
       code: 500
