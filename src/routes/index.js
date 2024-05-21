@@ -1,6 +1,7 @@
 //CONFIG. PADRÃO DE ROTEAMENTO E IMPORTAÇÕES
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 //REQUISIÇÃO HTTP
 router.get('', async (_, res) => {
@@ -8,16 +9,8 @@ router.get('', async (_, res) => {
   //EXECUTA ESSE BLOCO AO BATER NA ROTA
   try {
 
-    //RETORNA AS ROTAS DISPONÍVEIS
-    res.status(200).send(`
-      <p>Rotas disponíveis:</p>
-      <ul>
-        <li><a href="/user">user</a></li>
-        <li><a href="/goal">goal</a></li>
-        <li><a href="/category">category</a></li>
-        <li><a href="/transaction">transaction</a></li>
-      </ul>
-    `);
+    //RETORNA O CONTEUDO DO INDEX.HTML
+    res.sendFile(path.join(__dirname, '..','..', 'public', 'index.html'));
 
   //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {

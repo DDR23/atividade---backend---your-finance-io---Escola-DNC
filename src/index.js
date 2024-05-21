@@ -10,6 +10,11 @@ app.use(cors());
 //CONFIG. PADRÃO DO DOTENV
 require('dotenv').config();
 
+//CONFIG. PADRÃO DO FAVICON
+const path = require('path');
+const favicon = require('serve-favicon');
+app.use(favicon(path.join(__dirname, '..','public', 'favicon.ico')));
+
 //EXECUTA A FUNÇÃO DE CONEXÃO COM O BANCO DE DADOS
 const conn = require('./db/conn');
 conn();
