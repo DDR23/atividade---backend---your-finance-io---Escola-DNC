@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const schemaCategory = require('../../schemas/schemaCategory');
+const schemaTransaction = require('../../schemas/schemaTransaction');
 
 //REQUISIÇÃO HTTP
 router.delete('/delete/:id', async (req, res) => {
@@ -19,6 +20,16 @@ router.delete('/delete/:id', async (req, res) => {
       });
     }
 
+    //VERIFICA SE EXISTEM TRANSAÇÕES QUE PERTENCEM A ESSA CATEGORIA
+    const transaction = await schemaTransaction.findOne({ where: { FK_CATEGORY_ID: category.CATEGORY_ID} })
+    if(transaction) {
+      return res.status(400).json({
+        error: 'Bad Request',
+        message: 'Cannot delete this category while transactions reference it.',
+        code: 400
+      })
+    }
+    
     //EXECUTA O DELETE
     await category.destroy();
 
