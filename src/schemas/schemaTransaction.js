@@ -23,6 +23,10 @@ const Transaction = sequelize.define('TB_TRANSACTION', {
     type: DataTypes.DATEONLY,
     allowNull: false
   },
+  TRANSACTION_TYPE: {
+    type: DataTypes.ENUM('Receita', 'Despesa'),
+    allowNull: false
+  },
   FK_USER_ID: {
     type: DataTypes.INTEGER,
     allowNull: false,

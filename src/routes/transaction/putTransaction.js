@@ -21,7 +21,7 @@ router.put('/edit/:id', async (req, res) => {
     }
 
     //PEGA TODOS OS VALORES PARA QUE SEJAM ALTERADOS
-    const { TRANSACTION_DESCRIPTION, TRANSACTION_AMOUNT, TRANSACTION_DATE, FK_CATEGORY_ID } = req.body;
+    const { TRANSACTION_DESCRIPTION, TRANSACTION_AMOUNT, TRANSACTION_DATE, TRANSACTION_TYPE, FK_CATEGORY_ID } = req.body;
 
     //VERIFICA SE ALGUM VALOR FOI PASSADO
     if (TRANSACTION_DESCRIPTION !== undefined) {
@@ -36,6 +36,18 @@ router.put('/edit/:id', async (req, res) => {
     //VERIFICA SE ALGUM VALOR FOI PASSADO
     if (TRANSACTION_DATE !== undefined) {
       transaction.TRANSACTION_DATE = TRANSACTION_DATE;
+    }
+
+    //VERIFICA SE ALGUM VALOR FOI PASSADO
+    if (TRANSACTION_TYPE !== undefined) {
+      if(TRANSACTION_TYPE !== 'Receita' && TRANSACTION_TYPE !== 'Despesa') {
+        return res.status(400).json({
+          error: 'Bad Request',
+          message: `TRANSACTION_TYPE must be either 'Receita' or 'Despesa'.`,
+          code: 400
+        });
+      }
+      transaction.TRANSACTION_TYPE = TRANSACTION_TYPE;
     }
 
     //VERIFICA SE ALGUM VALOR FOI PASSADO

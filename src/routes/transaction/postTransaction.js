@@ -12,7 +12,7 @@ router.post('/create', async (req, res) => {
   try {
 
     //GUARDA O CONTEÚDO QUE VEM DO BODY
-    const { TRANSACTION_AMOUNT, TRANSACTION_DESCRIPTION, TRANSACTION_DATE, FK_USER_ID, FK_CATEGORY_ID } = req.body;
+    const { TRANSACTION_AMOUNT, TRANSACTION_DESCRIPTION, TRANSACTION_DATE, TRANSACTION_TYPE, FK_USER_ID, FK_CATEGORY_ID } = req.body;
 
     //VERIFICA SE O USUÁRIO EXISTE
     const user = await schemaUser.findByPk(FK_USER_ID);
@@ -34,8 +34,26 @@ router.post('/create', async (req, res) => {
       });
     }
 
+    //VERIFICA SE TODOS OS CAMPOS FORAM PREENCHIDOS
+    if(TRANSACTION_TYPE !== 'Receita' && TRANSACTION_TYPE !== 'Despesa') {
+      return res.status(400).json({
+        error: 'Bad Request',
+        message: `TRANSACTION_TYPE must be either 'Receita' or 'Despesa'.`,
+        code: 400
+      });
+    }
+
+    //VERIFICA SE TODOS OS CAMPOS FORAM PREENCHIDOS
+    if(TRANSACTION_AMOUNT == undefined || TRANSACTION_DESCRIPTION == undefined || TRANSACTION_DATE == undefined || TRANSACTION_TYPE == undefined || FK_USER_ID == undefined || FK_CATEGORY_ID == undefined ) {
+      return res.status(400).json({
+        error: 'Bad Request',
+        message: 'Please fill in all the fields.',
+        code: 400
+      });
+    }
+    
     //EXECUTA O POST
-    const newTransaction = await schemaTransaction.create({ TRANSACTION_AMOUNT, TRANSACTION_DESCRIPTION, TRANSACTION_DATE, FK_USER_ID, FK_CATEGORY_ID });
+    const newTransaction = await schemaTransaction.create({ TRANSACTION_AMOUNT, TRANSACTION_DESCRIPTION, TRANSACTION_DATE, TRANSACTION_TYPE, FK_USER_ID, FK_CATEGORY_ID });
 
     //RETORNA O RESULTADO
     return res.status(201).json(newTransaction);
