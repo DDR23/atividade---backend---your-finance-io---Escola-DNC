@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const schemaUser = require('../../schemas/schemaUser');
 const schemaCategory = require('../../schemas/schemaCategory');
+const schemaGoal = require('../../schemas/schemaGoal');
+const schemaTransaction = require('../../schemas/schemaTransaction');
 
 //REQUISIÇÃO HTTP
 router.delete('/delete/:id', async (req, res) => {
@@ -22,6 +24,8 @@ router.delete('/delete/:id', async (req, res) => {
 
     //DELETE TODOS OS REGISTROS DAS OUTRAS TABELAS QUE FAZEM REFERENCIA A ESSE USUARIO
     await schemaCategory.destroy({ where: { FK_USER_ID: req.params.id } });
+    await schemaGoal.destroy({ where: { FK_USER_ID: req.params.id } });
+    await schemaTransaction.destroy({ where: { FK_USER_ID: req.params.id } });
 
     //EXECUTA O DELETE
     await user.destroy();
