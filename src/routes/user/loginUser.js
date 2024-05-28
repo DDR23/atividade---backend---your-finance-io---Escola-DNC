@@ -33,7 +33,6 @@ router.post('/login', async (req, res) => {
         code: 400
       });
     }
-    
 
     //GERA O TOKEN JTW
     const token = jwt.sign({ id: user.USER_ID }, process.env.JWT_SECRET, { expiresIn: '1h' });

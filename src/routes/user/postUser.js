@@ -2,6 +2,8 @@
 const express = require('express');
 const router = express.Router();
 const schemaUser = require('../../schemas/schemaUser');
+const argon2 = require('argon2');
+const jwt = require('jsonwebtoken');
 
 //REQUISIÇÃO HTTP
 router.post('/create', async (req, res) => {
@@ -13,8 +15,8 @@ router.post('/create', async (req, res) => {
     const { USER_EMAIL, USER_NAME, USER_PASSWORD } = req.body;
 
     //VERIFICA SE JÁ EXISTE ALGUM USUARIO COM O EMAIL PASSADO NO 'USER_EMAIL'
-    const emailNotUnique = await schemaUser.findOne({ where: { USER_EMAIL } });
-    if (emailNotUnique) {
+    const existingUser  = await schemaUser.findOne({ where: { USER_EMAIL } });
+    if (existingUser ) {
       return res.status(409).json({
         error: 'This email already exists',
         message: 'There is already a user with that email in the database.',
@@ -22,11 +24,17 @@ router.post('/create', async (req, res) => {
       });
     }
 
-    //EXECUTA O POST
-    const newUser = await schemaUser.create({ USER_EMAIL, USER_NAME, USER_PASSWORD });
+    //CRIPTOGRAFA A SENHA USANDO ARGON2
+    const hashedPassword = await argon2.hash(USER_PASSWORD);
 
-    //RETORNA O RESULTADO
-    return res.status(201).json(newUser);
+    //EXECUTA O POST
+    const newUser = await schemaUser.create({ USER_EMAIL, USER_NAME, USER_PASSWORD: hashedPassword });
+    
+    //GERA UM TOKEN JWT PARA O NOVO USUÁRIO
+    const token = jwt.sign({ id: newUser.USER_ID }, process.env.JWT_SECRET, { expiresIn: '1h' })
+
+    //RETORNA O TOKEN
+    return res.status(201).json({ token });
 
   //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
