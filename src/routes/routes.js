@@ -5,6 +5,7 @@ function routes(app) {
 
   //USER
   app.use('/user', require('./user/postUser'));
+  app.use('/user', require('./user/loginUser'));
   app.use('/user', require('./user/getUser'));
   app.use('/user', require('./user/getOneUser'));
   app.use('/user', require('./user/putUser'));
