@@ -19,7 +19,7 @@ const User = sequelize.define('TB_USER', {
     allowNull: false
   },
   USER_PASSWORD: {
-    type: DataTypes.STRING(64),
+    type: DataTypes.STRING(97),
     allowNull: false
   }  
 },{
