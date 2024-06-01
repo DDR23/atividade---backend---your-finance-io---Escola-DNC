@@ -11,7 +11,9 @@ router.get('/me', authenticateToken, async (req, res) => {
   try {
 
     //VERIFICA SE O USUARIO EXISTE
-    const user = await schemaUser.findByPk(req.user.id);
+    const user = await schemaUser.findByPk(req.user.id, {
+      attributes: ['USER_NAME', 'USER_EMAIL']
+    });
     if (!user) {
       return res.status(404).json({
         error: 'User not found',
