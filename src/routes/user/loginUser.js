@@ -42,7 +42,6 @@ router.post('/login', async (req, res) => {
 
   //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
-    console.log(error)
     return res.status(500).json({
       error: 'Internal server error',
       message: 'Login failed due to an internal server error. Please try again later.',
