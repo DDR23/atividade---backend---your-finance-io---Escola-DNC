@@ -2,15 +2,19 @@
 const express = require('express');
 const router = express.Router();
 const schemaGoal = require('../../schemas/schemaGoal');
+const authenticateToken = require('../../middlewares/authenticateToken');
 
 //REQUISIÇÃO HTTP
-router.get('/', async (_, res) => {
+router.get('/user/:userId', authenticateToken, async (req, res) => {
 
   //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {
 
+    //PEGA O ID DO USUARIO
+    const { userId } = req.params;
+
     //BUSCA TODAS AS INFORMAÇÕES DA TABELA DE INVENTARIO
-    const goal = await schemaGoal.findAll();
+    const goal = await schemaGoal.findAll({ where: { FK_USER_ID: userId } });
 
     //RETORNA O RESULTADO
     return res.status(200).json(goal);

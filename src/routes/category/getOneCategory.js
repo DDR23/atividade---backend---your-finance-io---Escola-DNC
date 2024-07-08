@@ -2,9 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const schemaCategory = require('../../schemas/schemaCategory');
+const authenticateToken = require('../../middlewares/authenticateToken');
 
 //REQUISIÇÃO HTTP
-router.get('/:id', async (req, res) => {
+router.get('/:id', authenticateToken, async (req, res) => {
 
   //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {

@@ -4,9 +4,10 @@ const router = express.Router();
 const schemaTransaction = require('../../schemas/schemaTransaction');
 const schemaUser = require('../../schemas/schemaUser');
 const schemaCategory = require('../../schemas/schemaCategory');
+const authenticateToken = require('../../middlewares/authenticateToken');
 
 //REQUISIÇÃO HTTP
-router.post('/create', async (req, res) => {
+router.post('/create', authenticateToken, async (req, res) => {
 
   //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {

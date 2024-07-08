@@ -2,9 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const schemaGoal = require('../../schemas/schemaGoal');
+const authenticateToken = require('../../middlewares/authenticateToken');
 
 //REQUISIÇÃO HTTP
-router.put('/edit/:id', async (req, res) => {
+router.put('/edit/:id', authenticateToken, async (req, res) => {
 
   //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {

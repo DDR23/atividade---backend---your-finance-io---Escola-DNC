@@ -5,9 +5,10 @@ const schemaUser = require('../../schemas/schemaUser');
 const schemaCategory = require('../../schemas/schemaCategory');
 const schemaGoal = require('../../schemas/schemaGoal');
 const schemaTransaction = require('../../schemas/schemaTransaction');
+const authenticateToken = require('../../middlewares/authenticateToken');
 
 //REQUISIÇÃO HTTP
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', authenticateToken, async (req, res) => {
 
   //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {

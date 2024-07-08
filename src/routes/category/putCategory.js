@@ -1,10 +1,11 @@
 //CONFIG. PADRÃO DE ROTEAMENTO E IMPORTAÇÕES
 const express = require('express');
 const router = express.Router();
-const schemaCategory = require('../../schemas/schemaCategory')
+const schemaCategory = require('../../schemas/schemaCategory');
+const authenticateToken = require('../../middlewares/authenticateToken');
 
 //REQUISIÇÃO HTTP
-router.put('/edit/:id', async (req, res) => {
+router.put('/edit/:id', authenticateToken, async (req, res) => {
 
   //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {

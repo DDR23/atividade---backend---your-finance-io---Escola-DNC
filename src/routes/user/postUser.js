@@ -31,7 +31,7 @@ router.post('/create', async (req, res) => {
     const newUser = await schemaUser.create({ USER_EMAIL, USER_NAME, USER_PASSWORD: hashedPassword });
     
     //GERA UM TOKEN JWT PARA O NOVO USUÁRIO
-    const token = jwt.sign({ id: newUser.USER_ID }, process.env.JWT_SECRET, { expiresIn: '1h' })
+    const token = jwt.sign({ id: newUser.USER_ID }, process.env.JWT_SECRET, { expiresIn: '20h' })
 
     //RETORNA O TOKEN
     return res.status(201).json({ token });

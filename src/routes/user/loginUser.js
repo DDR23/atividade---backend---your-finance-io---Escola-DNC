@@ -35,7 +35,7 @@ router.post('/login', async (req, res) => {
     }
 
     //GERA O TOKEN JTW
-    const token = jwt.sign({ id: user.USER_ID }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user.USER_ID }, process.env.JWT_SECRET, { expiresIn: '20h' });
 
     //RETORNA O TOKEN
     return res.status(200).json({ token });

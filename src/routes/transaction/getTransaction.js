@@ -2,9 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const schemaTransaction = require('../../schemas/schemaTransaction');
+const authenticateTokenAdmin = require('../../middlewares/authenticateTokenAdmin');
 
 //REQUISIÇÃO HTTP
-router.get('/', async (_, res) => {
+router.get('/', authenticateTokenAdmin, async (_, res) => {
 
   //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {
