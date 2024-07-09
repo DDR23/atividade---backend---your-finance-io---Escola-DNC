@@ -21,6 +21,10 @@ const User = sequelize.define('TB_USER', {
   USER_PASSWORD: {
     type: DataTypes.STRING(97),
     allowNull: false
+  },
+  USER_ADMIN: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
   }  
 },{
   tableName: 'TB_USER',

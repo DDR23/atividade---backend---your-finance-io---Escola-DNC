@@ -34,11 +34,16 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    //GERA O TOKEN JTW
-    const token = jwt.sign({ id: user.USER_ID }, process.env.JWT_SECRET, { expiresIn: '20h' });
-
-    //RETORNA O TOKEN
-    return res.status(200).json({ token });
+    //GERA E RETORNA O TOKEN JTW
+    const { USER_ADMIN } = user;
+    if(USER_ADMIN === true) {
+      const token = jwt.sign({ id: user.USER_ID }, process.env.JWT_SECRET, { expiresIn: '20h' });
+      const tokenAdmin = jwt.sign({ id: user.USER_ID }, process.env.JWT_SECRET_ADMIN, { expiresIn: '20h' });
+      return res.status(200).json({ token, tokenAdmin });
+    } else { 
+      const token = jwt.sign({ id: user.USER_ID }, process.env.JWT_SECRET, { expiresIn: '20h' });
+      return res.status(200).json({ token });
+    }
 
   //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
