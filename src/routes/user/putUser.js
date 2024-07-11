@@ -1,6 +1,7 @@
 //CONFIG. PADRÃO DE ROTEAMENTO E IMPORTAÇÕES
 const express = require('express');
 const router = express.Router();
+const argon2 = require('argon2');
 const schemaUser = require('../../schemas/schemaUser');
 const authenticateToken = require('../../middlewares/authenticateToken');
 
@@ -45,7 +46,8 @@ router.put('/edit/:id', authenticateToken, async (req, res) => {
     
     //VERIFICA SE ALGUM VALOR FOI PASSADO
     if(USER_PASSWORD !== undefined) {
-      user.USER_PASSWORD = USER_PASSWORD;
+      const hashedPassword = await argon2.hash(USER_PASSWORD);
+      user.USER_PASSWORD = hashedPassword;
     }
 
     //EXECUTA O PUT
