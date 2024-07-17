@@ -22,22 +22,7 @@ router.put('/edit/:id', authenticateToken, async (req, res) => {
     }
 
     //PEGA TODOS OS VALORES PARA QUE SEJAM ALTERADOS
-    const { USER_EMAIL, USER_NAME, USER_PASSWORD } = req.body;
-
-    //VERIFICA SE ALGUM VALOR FOI PASSADO
-    if(USER_EMAIL !== undefined) {
-      //VERIFICA SE O VALOR PASSADO JA EXISTE NO BANCO E RETORNA ERRO
-      const emailNotUnique = await schemaUser.findOne({ where: { USER_EMAIL: USER_EMAIL } });
-      if(emailNotUnique){
-        return res.status(409).json({
-          error: 'This email already exists',
-          message: 'There is already a user with that email in the database.',
-          code: 409
-        });
-      }
-      //SALVA O NOVO VALOR
-      user.USER_EMAIL = USER_EMAIL;
-    }
+    const { USER_NAME, USER_PASSWORD, USER_DELETED } = req.body;
 
     //VERIFICA SE ALGUM VALOR FOI PASSADO
     if(USER_NAME !== undefined) {
@@ -48,6 +33,18 @@ router.put('/edit/:id', authenticateToken, async (req, res) => {
     if(USER_PASSWORD !== undefined) {
       const hashedPassword = await argon2.hash(USER_PASSWORD);
       user.USER_PASSWORD = hashedPassword;
+    }
+
+    //VERIFICA SE ALGUM VALOR FOI PASSADO
+    if(USER_DELETED === true) {
+      return res.status(400).json({
+        error: 'Invalid operation',
+        message: 'Use the DELETE method to mark a user as deleted.',
+        code: 400
+      })
+    }
+    if(USER_DELETED === false) {
+      user.USER_DELETED = USER_DELETED
     }
 
     //EXECUTA O PUT

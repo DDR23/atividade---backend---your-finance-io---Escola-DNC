@@ -23,13 +23,18 @@ router.delete('/delete/:id', authenticateToken, async (req, res) => {
       });
     };
 
-    //DELETE TODOS OS REGISTROS DAS OUTRAS TABELAS QUE FAZEM REFERENCIA A ESSE USUARIO
-    await schemaCategory.destroy({ where: { FK_USER_ID: req.params.id } });
-    await schemaGoal.destroy({ where: { FK_USER_ID: req.params.id } });
-    await schemaTransaction.destroy({ where: { FK_USER_ID: req.params.id } });
+    //VERIFICA SE O USUÁRIO JA ESTÁ MARCADO COMO DELETADO
+    if ( user.USER_DELETED === true) {
+      return res.status(400).json({
+        error: 'User already deleted',
+        message: 'The user is already marked as deleted.',
+        code: 400
+      })
+    }
 
-    //EXECUTA O DELETE
-    await user.destroy();
+    //EXECUTA O SOFT DELETE
+    user.USER_DELETED = true
+    await user.save();
 
     //RETORNA O RESULTADO
     return res.status(200).json({

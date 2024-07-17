@@ -25,7 +25,11 @@ const User = sequelize.define('TB_USER', {
   USER_ADMIN: {
     type: DataTypes.BOOLEAN,
     defaultValue: false
-  }  
+  },
+  USER_DELETED: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  }
 },{
   tableName: 'TB_USER',
   timestamps: true,
