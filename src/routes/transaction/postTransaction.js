@@ -8,12 +8,13 @@ const authenticateToken = require('../../middlewares/authenticateToken');
 
 //REQUISIÇÃO HTTP
 router.post('/create', authenticateToken, async (req, res) => {
-
+  
   //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {
-
+    
     //GUARDA O CONTEÚDO QUE VEM DO BODY
     const { TRANSACTION_AMOUNT, TRANSACTION_DESCRIPTION, TRANSACTION_DATE, TRANSACTION_TYPE, FK_USER_ID, FK_CATEGORY_ID } = req.body;
+    //TODO retirar FK_USER_ID do body.req e pegar via token
 
     //VERIFICA SE O USUÁRIO EXISTE
     const user = await schemaUser.findByPk(FK_USER_ID);

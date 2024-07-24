@@ -18,13 +18,6 @@ function routes(app) {
   app.use('/category', require('./category/getOneCategory'));
   app.use('/category', require('./category/putCategory'));
   app.use('/category', require('./category/deleteCategory'));
-  
-  //GOAL
-  app.use('/goal', require('./goal/postGoal'));
-  app.use('/goal', require('./goal/getGoal'));
-  app.use('/goal', require('./goal/getOneGoal'));
-  app.use('/goal', require('./goal/putGoal'));
-  app.use('/goal', require('./goal/deleteGoal'));
 
   //TRANSACTION
   app.use('/transaction', require('./transaction/postTransaction'));

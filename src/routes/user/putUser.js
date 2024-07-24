@@ -7,6 +7,7 @@ const authenticateToken = require('../../middlewares/authenticateToken');
 
 //REQUISIÇÃO HTTP
 router.put('/edit/:id', authenticateToken, async (req, res) => {
+  //TODO retirar :id da rota e pegar via token
 
   //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {

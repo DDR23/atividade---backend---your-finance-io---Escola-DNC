@@ -12,7 +12,8 @@ router.post('/create', authenticateToken, async (req, res) => {
   try {
 
     //GUARDA O CONTEÚDO QUE VEM DO BODY
-    const { CATEGORY_NAME, FK_USER_ID } = req.body;
+    const { CATEGORY_NAME } = req.body;
+    const FK_USER_ID = req.user.id;
 
     //VERIFICA SE O USUARIO EXISTE
     const user = await schemaUser.findByPk(FK_USER_ID);

@@ -5,16 +5,13 @@ const schemaCategory = require('../../schemas/schemaCategory');
 const authenticateToken = require('../../middlewares/authenticateToken');
 
 //REQUISIÇÃO HTTP
-router.get('/user/:userId', authenticateToken, async (req, res) => {
+router.get('/user', authenticateToken, async (req, res) => {
 
   //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {
 
-    //PEGA O ID DO USUARIO
-    const { userId } = req.params;
-
     //BUSCA TODAS AS INFORMAÇÕES DA TABELA DE CATEGORIA
-    const category = await schemaCategory.findAll({ where: { FK_USER_ID: userId } });
+    const category = await schemaCategory.findAll({ where: { FK_USER_ID: req.user.id } });
 
     //RETORNA O RESULTADO
     return res.status(200).json(category);

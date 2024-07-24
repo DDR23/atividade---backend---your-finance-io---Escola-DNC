@@ -2,13 +2,11 @@
 const express = require('express');
 const router = express.Router();
 const schemaUser = require('../../schemas/schemaUser');
-const schemaCategory = require('../../schemas/schemaCategory');
-const schemaGoal = require('../../schemas/schemaGoal');
-const schemaTransaction = require('../../schemas/schemaTransaction');
 const authenticateToken = require('../../middlewares/authenticateToken');
 
 //REQUISIÇÃO HTTP
 router.delete('/delete/:id', authenticateToken, async (req, res) => {
+  //TODO retirar :id da rota e pegar via token
 
   //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {
