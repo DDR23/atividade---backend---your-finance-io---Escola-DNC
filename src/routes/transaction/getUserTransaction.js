@@ -5,14 +5,14 @@ const schemaTransaction = require('../../schemas/schemaTransaction');
 const authenticateToken = require('../../middlewares/authenticateToken');
 
 //REQUISIÇÃO HTTP
-router.get('/user/:userId', authenticateToken, async (req, res) => {
+router.get('/user', authenticateToken, async (req, res) => {
   //TODO retirar :id da rota e pegar via token
 
   //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {
 
     //PEGA O ID DO USUARIO
-    const { userId } = req.params;
+    const userId = req.user.id;
 
     //BUSCA TODAS AS INFORMAÇÕES DA TABELA DE TRANSAÇÕES
     const transaction = await schemaTransaction.findAll({ where: { FK_USER_ID: userId } });
