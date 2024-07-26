@@ -24,7 +24,7 @@ const Transaction = sequelize.define('TB_TRANSACTION', {
     allowNull: false
   },
   TRANSACTION_TYPE: {
-    type: DataTypes.ENUM('Receita', 'Despesa'),
+    type: DataTypes.ENUM('revenue', 'expense'),
     allowNull: false
   },
   FK_USER_ID: {

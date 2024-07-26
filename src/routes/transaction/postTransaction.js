@@ -37,10 +37,10 @@ router.post('/create', authenticateToken, async (req, res) => {
     }
 
     //VERIFICA SE TODOS OS CAMPOS FORAM PREENCHIDOS
-    if(TRANSACTION_TYPE !== 'Receita' && TRANSACTION_TYPE !== 'Despesa') {
+    if(TRANSACTION_TYPE !== 'revenue' && TRANSACTION_TYPE !== 'expense') {
       return res.status(400).json({
         error: 'Bad Request',
-        message: `TRANSACTION_TYPE must be either 'Receita' or 'Despesa'.`,
+        message: `TRANSACTION_TYPE must be either 'revenue' or 'expense'.`,
         code: 400
       });
     }
