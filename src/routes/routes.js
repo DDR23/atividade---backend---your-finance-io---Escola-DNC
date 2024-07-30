@@ -21,7 +21,6 @@ function routes(app) {
   app.use('/transaction', require('./transaction/getTransaction'));
   app.use('/transaction', require('./transaction/getUserTransaction'));
   app.use('/transaction', require('./transaction/getOneTransaction'));
-  app.use('/transaction', require('./transaction/putTransaction'));
   app.use('/transaction', require('./transaction/deleteTransaction'));
 };
 
