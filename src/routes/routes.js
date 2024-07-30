@@ -18,7 +18,6 @@ function routes(app) {
 
   //TRANSACTION
   app.use('/transaction', require('./transaction/postTransaction'));
-  app.use('/transaction', require('./transaction/getTransaction'));
   app.use('/transaction', require('./transaction/getUserTransaction'));
   app.use('/transaction', require('./transaction/getOneTransaction'));
   app.use('/transaction', require('./transaction/deleteTransaction'));
