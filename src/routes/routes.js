@@ -2,9 +2,9 @@
 function routes(app) {
   //HOME
   app.use('/', require('./index'));
-  app.use('/', require('./user/userMe'));
-
+  
   //USER
+  app.use('/', require('./user/userMe'));
   app.use('/user', require('./user/postUser'));
   app.use('/user', require('./user/putUser'));
   app.use('/user', require('./user/loginUser'));
