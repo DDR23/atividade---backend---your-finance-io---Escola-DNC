@@ -16,9 +16,19 @@ function authenticateToken(req, res, next) {
         message: 'Token is required for authentication.'
       });
     }
+
+    //VERIFICA SE JWT_SECRET ESTÁ DEFINIDO
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+      return res.status(500).json({
+        error: 'Internal server error',
+        message: 'JWT secret is not defined. Please check the server configuration.',
+        code: 500
+      });
+    }
     
     //VERIFICA SE O TOKEN É VALIDO
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    jwt.verify(token, secret, (err, user) => {
       if (err) {
         return res.status(403).json({
           error: 'Invalid token',

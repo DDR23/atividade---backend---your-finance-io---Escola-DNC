@@ -6,14 +6,13 @@ const schemaUser = require('../../schemas/schemaUser');
 const authenticateToken = require('../../middlewares/authenticateToken');
 
 //REQUISIÇÃO HTTP
-router.put('/edit/:id', authenticateToken, async (req, res) => {
-  //TODO retirar :id da rota e pegar via token
+router.put('/edit', authenticateToken, async (req, res) => {
 
   //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {
 
     //VERIFICA SE O USUARIO EXISTE
-    const user = await schemaUser.findByPk(req.params.id);
+    const user = await schemaUser.findByPk(req.user.id);
     if(!user){
       return res.status(404).json({
         error: 'User not found',
