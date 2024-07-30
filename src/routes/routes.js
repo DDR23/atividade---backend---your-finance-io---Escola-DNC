@@ -7,7 +7,6 @@ function routes(app) {
   //USER
   app.use('/user', require('./user/postUser'));
   app.use('/user', require('./user/putUser'));
-  app.use('/user', require('./user/deleteUser'));
   app.use('/user', require('./user/loginUser'));
 
   //CATEGORY
