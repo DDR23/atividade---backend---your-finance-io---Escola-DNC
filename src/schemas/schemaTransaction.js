@@ -13,7 +13,7 @@ const Transaction = sequelize.define('TB_TRANSACTION', {
   },
   TRANSACTION_DESCRIPTION: {
     type: DataTypes.STRING(255),
-    allowNull: true
+    allowNull: false
   },
   TRANSACTION_AMOUNT: {
     type: DataTypes.INTEGER,
