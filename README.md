@@ -1,5 +1,6 @@
 # Atividade---BACKEND---your-finance-io---Escola-DNC
 
+TODO - fazer uma mini documentaçõa do projeto do README.md e hospedagem
 TODO - refatorar projeto para typescript
 TODO - separar em branchs as versões:
   - feat/v1.0.0 onde deve ficar o codigo legado com JS
