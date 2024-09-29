@@ -1,7 +1,15 @@
 # Atividade---BACKEND---your-finance-io---Escola-DNC
 
-TODO - fazer uma mini documentaçõa do projeto do README.md e hospedagem
-TODO - refatorar projeto para typescript
-TODO - separar em branchs as versões:
-  - feat/v1.0.0 onde deve ficar o codigo legado com JS
-  - feat/v2.0.0 onde deve fica o projeto refatorado em TS com modules ES6
+## Sobre o projeto
+Esse é um projeto divido em 2 partes, trata-se de um sistema de controle financeiro pessoal, essa parte é o BACKEND do sistema.
+
+Projeto hospedado em: Esse projeto nao possui hospedagem
+
+## Comandos para rodar o projeto
+
+```bash
+  npm i
+```
+```bash
+  npm run dev
+```
